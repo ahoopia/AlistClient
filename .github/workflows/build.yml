@@ -5,7 +5,7 @@ name: Flutter Build
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 jobs:
@@ -37,7 +37,7 @@ jobs:
 
       # Build APK (Release version)
       - name: Build APK
-        run: flutter build apk --release 
+        run: flutter build apk --release --split-per-abi
 
       # List output APK files
       - name: List APK Files
