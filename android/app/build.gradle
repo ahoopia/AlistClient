@@ -59,21 +59,12 @@ android {
         }
     }
 
-    signingConfigs {
-        release {
-            keyAlias rootProject.ext.keyAlias
-            keyPassword rootProject.ext.keyPassword
-            storeFile file('Alist.jks')
-            storePassword rootProject.ext.storePassword
-        }
-    }
+   
 
     buildTypes {
-        debug {
-            signingConfig signingConfigs.release
-        }
+        
         release {
-            signingConfig signingConfigs.release
+            
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
