@@ -37,7 +37,7 @@ jobs:
 
       # Build APK (Release version)
       - name: Build APK
-        run: flutter build apk --release --split-per-abi
+        run: flutter build apk --release
 
       # List output APK files
       - name: List APK Files
