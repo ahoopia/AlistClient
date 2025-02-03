@@ -40,7 +40,7 @@ jobs:
 
       # List output APK files
       - name: List APK Files
-        run: ls ./build
+        run: ls ./build/app/outputs/flutter-apk/
 
       # Upload release APK
       - name: Upload Release APK
@@ -48,6 +48,6 @@ jobs:
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
-          artifacts: "build/*.apk"
+          artifacts: "build/app/outputs/flutter-apk/*.apk"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: '1.0.3'
