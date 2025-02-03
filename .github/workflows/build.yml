@@ -1,0 +1,54 @@
+# GitHub Actions Workflow: flutter_build.yml
+
+name: Flutter Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      # Set up Java 11
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '12.x'
+          
+      # Set up Flutter (Update Flutter to 3.27.3 to support Dart 3.3.0)
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.3'  # Update Flutter version here
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+         flutter clean        
+         flutter pub get
+
+      # Build APK (Release version)
+      - name: Build APK
+        run: flutter build apk --release 
+
+      # List output APK files
+      - name: List APK Files
+        run: ls ./build/app/outputs/flutter-apk
+
+      # Upload release APK
+      - name: Upload Release APK
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          artifacts: "build/app/outputs/flutter-apk/*.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: '1.0.3'
