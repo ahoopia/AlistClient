@@ -1,6 +1,6 @@
 # GitHub Actions Workflow: flutter_build.yml
 
-name: Flutter Build
+name: Flutter Build using macos
 
 on:
   push:
